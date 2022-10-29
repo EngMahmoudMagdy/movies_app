@@ -1,7 +1,8 @@
 package com.magdy.moviesapp.domain.useCases
 
 import com.magdy.moviesapp.domain.repos.MoviesRepo
+import javax.inject.Inject
 
-class GetNowPlayingMoviesUseCase(private val moviesRepo: MoviesRepo) {
-    suspend operator fun invoke() = moviesRepo.getNowPlayingMovies()
+class GetNowPlayingMoviesUseCase @Inject constructor(val moviesRepo: MoviesRepo) {
+    suspend operator fun invoke(page:Int) = moviesRepo.getNowPlayingMovies(page)
 }

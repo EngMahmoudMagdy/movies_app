@@ -3,4 +3,5 @@ package com.magdy.moviesapp.core.utils
 object Constants {
 
     const val BASE_URL_API = "https://api.themoviedb.org/3/movie/"
+    const val BASE_IMAGE_URL_API = "https://image.tmdb.org/t/p/original/"
 }

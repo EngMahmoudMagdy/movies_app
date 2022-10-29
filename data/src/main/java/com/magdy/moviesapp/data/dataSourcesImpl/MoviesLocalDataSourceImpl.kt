@@ -1,12 +1,14 @@
 package com.magdy.moviesapp.data.dataSourcesImpl
 
-import android.content.Context
-import com.magdy.moviesapp.core.database.AppDatabase
-import com.magdy.moviesapp.data.dataSources.MoviesLocalDataSource
+import com.magdy.moviesapp.core.database.MoviesDAO
 import com.magdy.moviesapp.core.models.Movie
+import com.magdy.moviesapp.data.dataSources.MoviesLocalDataSource
+import dagger.hilt.android.scopes.ActivityRetainedScoped
+import javax.inject.Inject
 
-class MoviesLocalDataSourceImpl(context: Context) : MoviesLocalDataSource {
-    private val moviesDAO = AppDatabase(context).moviesDAO()
+@ActivityRetainedScoped
+class MoviesLocalDataSourceImpl @Inject constructor(val moviesDAO: MoviesDAO) :
+    MoviesLocalDataSource {
 
     override suspend fun getAllFavoriteMovies(): List<Movie> = moviesDAO.getMovieList()
 

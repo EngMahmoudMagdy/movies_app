@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/homeFragment"
+        android:id="@+id/mostPopularFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_home_selected"
+        android:icon="@drawable/ic_baseline_movie_24"
         android:title="@string/now_playing" />
     <item
-        android:id="@+id/reservationsFragment"
+        android:id="@+id/topRatedFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_orders_selected"
+        android:icon="@drawable/ic_baseline_top_rated_24"
         android:title="@string/top_rated" />
+
+    <item
+        android:id="@+id/searchFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/search" />
 </menu>

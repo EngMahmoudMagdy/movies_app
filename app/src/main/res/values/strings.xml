@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MoviesApp</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="search">Search</string>
+    <string name="success">Success</string>
+    <string name="votes">%f (%d)</string>
 </resources>
