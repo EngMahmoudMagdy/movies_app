@@ -16,9 +16,9 @@ import javax.inject.Inject
 
 @ActivityRetainedScoped
 class MoviesRepoImpl @Inject constructor(
-     val moviesRemoteDataSource: MoviesRemoteDataSource,
-     val moviesLocalDataSource: MoviesLocalDataSource,
-) : MoviesRepo , BaseApiResponse(){
+    val moviesRemoteDataSource: MoviesRemoteDataSource,
+    val moviesLocalDataSource: MoviesLocalDataSource,
+) : MoviesRepo, BaseApiResponse() {
     override suspend fun getNowPlayingMovies(page: Int): Flow<NetworkResult<MoviesResponse>> {
         return flow {
             emit(safeApiCall {
@@ -48,8 +48,9 @@ class MoviesRepoImpl @Inject constructor(
     }
 
 
-    override suspend fun getAllFavoriteMovies(): List<Movie> =
-        moviesLocalDataSource.getAllFavoriteMovies()
+    override suspend fun getAllFavoriteMovies(limit: Int, offset: Int): List<Movie> {
+        return moviesLocalDataSource.getAllFavoriteMovies(limit, offset)
+    }
 
     override suspend fun addMovieToFavorites(movie: Movie) =
         moviesLocalDataSource.addMovieToFavorites(movie)

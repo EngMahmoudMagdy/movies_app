@@ -5,4 +5,5 @@
     <string name="search">Search</string>
     <string name="success">Success</string>
     <string name="votes">%f (%d)</string>
+    <string name="fav">Favorites</string>
 </resources>

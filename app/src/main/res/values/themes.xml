@@ -4,9 +4,4 @@
     <style name="Theme.MoviesApp" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:statusBarColor">@color/purple_700</item>
     </style>
-
-    <style name="customRoundedImageView" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/_8dp</item>
-    </style>
 </resources>

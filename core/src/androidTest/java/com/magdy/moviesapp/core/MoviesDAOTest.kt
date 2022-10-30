@@ -25,24 +25,7 @@ class MoviesDAOTest {
     private val tMovie = Movie(
         "",
         "",
-        false,
         "",
-        "",
-        0,
-        0.0,
-        0,
-        0,
-        0,
-        "",
-        "",
-        0,
-        "",
-        "",
-        0.0,
-        "",
-        false,
-        "",
-        ""
     )
 
     @Before

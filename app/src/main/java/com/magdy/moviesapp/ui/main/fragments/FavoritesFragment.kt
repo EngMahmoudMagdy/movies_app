@@ -9,27 +9,25 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.magdy.moviesapp.databinding.FgNowPlayingBinding
-import com.magdy.moviesapp.databinding.FgTopRatedBinding
+import com.magdy.moviesapp.databinding.FgFavoriteBinding
 import com.magdy.moviesapp.ui.main.adapters.MoviesAdapter
-import com.magdy.moviesapp.ui.main.viewModels.NowPlayingViewModel
-import com.magdy.moviesapp.ui.main.viewModels.TopRatedViewModel
+import com.magdy.moviesapp.ui.main.viewModels.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TopRatedFragment: Fragment() {
+class FavoritesFragment : Fragment() {
 
     lateinit var moviesAdapter: MoviesAdapter
-    val mViewModel by viewModels<TopRatedViewModel>()
-    lateinit var binding: FgTopRatedBinding
+    val mViewModel by viewModels<FavoriteViewModel>()
+    lateinit var binding: FgFavoriteBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FgTopRatedBinding.inflate(inflater, container, false)
+        binding = FgFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,16 +37,20 @@ class TopRatedFragment: Fragment() {
         initViewModel()
     }
 
-    private fun initViews() = with(binding){
+    private fun initViews() = with(binding) {
         moviesAdapter = MoviesAdapter()
         recycler.run {
             addItemDecoration(
-                DividerItemDecoration(requireContext(),
-                    DividerItemDecoration.VERTICAL)
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
             )
             addItemDecoration(
-                DividerItemDecoration(requireContext(),
-                    DividerItemDecoration.HORIZONTAL)
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.HORIZONTAL
+                )
             )
             this.adapter = moviesAdapter
         }

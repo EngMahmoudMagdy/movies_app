@@ -4,7 +4,7 @@ import com.magdy.moviesapp.core.models.Movie
 
 interface MoviesLocalDataSource {
 
-    suspend fun getAllFavoriteMovies(): List<Movie>
+    suspend fun getAllFavoriteMovies(limit: Int, offset: Int): List<Movie>
 
     suspend fun addMovieToFavorites(movie: Movie)
 

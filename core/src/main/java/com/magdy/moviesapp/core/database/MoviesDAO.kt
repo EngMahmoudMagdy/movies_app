@@ -7,13 +7,13 @@ import com.magdy.moviesapp.core.models.Movie
 
 @Dao
 interface MoviesDAO {
-    @Query("SELECT * FROM movies")
-    fun getMovieList(): List<Movie>
+    @Query("SELECT * FROM movies LIMIT :limit OFFSET :offset")
+    suspend fun getMovieList(limit: Int, offset: Int): List<Movie>
 
     @Insert
-    fun insertMovie(movie: Movie)
+    suspend fun insertMovie(movie: Movie)
 
 
     @Query("Delete FROM movies where id = :movieId")
-    fun deleteMovie(movieId: Int)
+    suspend fun deleteMovie(movieId: Int)
 }
