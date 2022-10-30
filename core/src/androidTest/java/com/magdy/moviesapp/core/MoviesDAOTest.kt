@@ -9,6 +9,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.magdy.moviesapp.core.database.AppDatabase
 import com.magdy.moviesapp.core.database.MoviesDAO
 import com.magdy.moviesapp.core.models.Movie
+import kotlinx.coroutines.test.runTest
 import org.junit.*
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
@@ -23,9 +24,7 @@ class MoviesDAOTest {
     private lateinit var database: AppDatabase
     private lateinit var moviesDAO: MoviesDAO
     private val tMovie = Movie(
-        "",
-        "",
-        "",
+        "", "", "", false, "", "", "", "", 0.0, 0.0, 0, false, 0
     )
 
     @Before
@@ -33,11 +32,8 @@ class MoviesDAOTest {
         val context: Context = InstrumentationRegistry.getInstrumentation().targetContext
         try {
             database = Room.inMemoryDatabaseBuilder(
-                context,
-                AppDatabase::class.java
-            )
-                .allowMainThreadQueries()
-                .build()
+                context, AppDatabase::class.java
+            ).allowMainThreadQueries().build()
         } catch (e: Exception) {
             Log.e("test", e.message ?: "")
         }
@@ -45,11 +41,11 @@ class MoviesDAOTest {
     }
 
     @Test
-    fun testAddingMovie() {
-        val preInsertMovies = moviesDAO.getMovieList()
+    fun testAddingMovie() = runTest{
+        val preInsertMovies = moviesDAO.getMovieList(1,1)
 
         moviesDAO.insertMovie(tMovie)
-        val postInsertMovies = moviesDAO.getMovieList()
+        val postInsertMovies = moviesDAO.getMovieList(1,1)
         val sizeDifference = postInsertMovies.size - preInsertMovies.size
         Assert.assertEquals(1, sizeDifference)
         val retrievedMovie = postInsertMovies.last()
@@ -57,11 +53,11 @@ class MoviesDAOTest {
     }
 
     @Test
-    fun testDeletingMovie() {
-        val preInsertMovies = moviesDAO.getMovieList()
+    fun testDeletingMovie() = runTest{
+        val preInsertMovies = moviesDAO.getMovieList(1,1)
         moviesDAO.insertMovie(tMovie)
         moviesDAO.deleteMovie(tMovie.id)
-        val postInsertMovies = moviesDAO.getMovieList()
+        val postInsertMovies = moviesDAO.getMovieList(1,1)
         val sizeDifference = postInsertMovies.size - preInsertMovies.size
         Assert.assertEquals(0, sizeDifference)
     }

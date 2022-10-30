@@ -4,6 +4,6 @@
     <string name="top_rated">Top Rated</string>
     <string name="search">Search</string>
     <string name="success">Success</string>
-    <string name="votes">%f (%d)</string>
+    <string name="votes">%.1f (%d)</string>
     <string name="fav">Favorites</string>
 </resources>
