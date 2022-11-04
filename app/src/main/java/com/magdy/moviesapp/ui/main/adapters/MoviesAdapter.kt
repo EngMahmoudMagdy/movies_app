@@ -1,5 +1,6 @@
 package com.magdy.moviesapp.ui.main.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -9,8 +10,10 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.magdy.moviesapp.R
 import com.magdy.moviesapp.core.models.Movie
+import com.magdy.moviesapp.core.utils.Constants
 import com.magdy.moviesapp.core.utils.Constants.BASE_IMAGE_URL_API
 import com.magdy.moviesapp.databinding.ItemMovieBinding
+import com.magdy.moviesapp.ui.details.MovieDetailsActivity
 
 class MoviesAdapter : PagingDataAdapter<Movie, MoviesAdapter.MyViewHolder>(DiffUtilCallback()) {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -37,6 +40,9 @@ class MoviesAdapter : PagingDataAdapter<Movie, MoviesAdapter.MyViewHolder>(DiffU
                 crossfade(true)
                 placeholder(R.mipmap.ic_launcher)
                 transformations(CircleCropTransformation())
+            }
+            view.root.setOnClickListener {
+                root.context.startActivity(Intent(root.context,MovieDetailsActivity::class.java).apply { putExtra(Constants.MOVIE, item) })
             }
         }
     }

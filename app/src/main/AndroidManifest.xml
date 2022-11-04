@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".ui.MyApplication"
         android:allowBackup="true"
@@ -15,6 +16,15 @@
         android:theme="@style/Theme.MoviesApp"
         tools:remove="android:appComponentFactory"
         tools:targetApi="33">
+        <activity
+            android:name=".MovieDetailsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_movie_details"
+            android:theme="@style/Theme.MoviesApp">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
@@ -29,6 +39,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name="com.magdy.moviesapp.ui.details.MovieDetailsActivity" />
     </application>
 
 </manifest>

@@ -10,6 +10,8 @@ interface MoviesRepo {
     suspend fun getNowPlayingMovies(page:Int): Flow<NetworkResult<MoviesResponse>>
     suspend fun getTopRatedMovies(page:Int): Flow<NetworkResult<MoviesResponse>>
     suspend fun getResultMoviesFromSearch(movieName:String,page:Int): Flow<NetworkResult<MoviesResponse>>
+    suspend fun getMovieById(movieId:Int): Flow<NetworkResult<Movie>>
+    suspend fun getMovieFromFavoriteById(movieId:Int): Movie?
     suspend fun getAllFavoriteMovies(limit: Int, offset: Int): List<Movie>
     suspend fun addMovieToFavorites(movie: Movie)
     suspend fun removeMovieFromFavorites(movieId: Int)

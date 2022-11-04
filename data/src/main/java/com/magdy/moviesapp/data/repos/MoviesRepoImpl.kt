@@ -47,6 +47,16 @@ class MoviesRepoImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun getMovieById(movieId: Int): Flow<NetworkResult<Movie>> {
+        return flow {
+            emit(safeApiCall {
+                moviesRemoteDataSource.getMovieById(movieId)
+            })
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getMovieFromFavoriteById(movieId: Int): Movie? = moviesLocalDataSource.getMovieFromFavorites(movieId)
+
 
     override suspend fun getAllFavoriteMovies(limit: Int, offset: Int): List<Movie> {
         return moviesLocalDataSource.getAllFavoriteMovies(limit, offset)

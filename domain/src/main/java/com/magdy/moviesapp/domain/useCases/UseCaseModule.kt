@@ -27,6 +27,14 @@ class UseCaseModule {
         GetResultMoviesFromSearchUseCase(moviesRepo)
 
     @Provides
+    fun provideGetMovieByIdUseCase(moviesRepo: MoviesRepo) =
+        GetMovieByIdUseCase(moviesRepo)
+
+    @Provides
+    fun provideGetMovieFromFavoritesUseCase(moviesRepo: MoviesRepo) =
+        GetMovieFromFavoritesUseCase(moviesRepo)
+
+    @Provides
     fun provideGetTopRatedMoviesUseCase(moviesRepo: MoviesRepo) =
         GetTopRatedMoviesUseCase(moviesRepo)
 

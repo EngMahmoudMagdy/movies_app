@@ -24,7 +24,7 @@ class MoviesDAOTest {
     private lateinit var database: AppDatabase
     private lateinit var moviesDAO: MoviesDAO
     private val tMovie = Movie(
-        "", "", "", false, "", "", "", "", 0.0, 0.0, 0, false, 0
+        "", "", "", false, "", "", "", "", 0.0, 0.0, 0, false, 0, null
     )
 
     @Before
@@ -41,11 +41,11 @@ class MoviesDAOTest {
     }
 
     @Test
-    fun testAddingMovie() = runTest{
-        val preInsertMovies = moviesDAO.getMovieList(20,0)
+    fun testAddingMovie() = runTest {
+        val preInsertMovies = moviesDAO.getMovieList(20, 0)
 
         moviesDAO.insertMovie(tMovie)
-        val postInsertMovies = moviesDAO.getMovieList(20,0)
+        val postInsertMovies = moviesDAO.getMovieList(20, 0)
         val sizeDifference = postInsertMovies.size - preInsertMovies.size
         Assert.assertEquals(1, sizeDifference)
         val retrievedMovie = postInsertMovies.last()
@@ -53,11 +53,11 @@ class MoviesDAOTest {
     }
 
     @Test
-    fun testDeletingMovie() = runTest{
-        val preInsertMovies = moviesDAO.getMovieList(20,0)
+    fun testDeletingMovie() = runTest {
+        val preInsertMovies = moviesDAO.getMovieList(20, 0)
         moviesDAO.insertMovie(tMovie)
         moviesDAO.deleteMovie(tMovie.id)
-        val postInsertMovies = moviesDAO.getMovieList(20,0)
+        val postInsertMovies = moviesDAO.getMovieList(20, 0)
         val sizeDifference = postInsertMovies.size - preInsertMovies.size
         Assert.assertEquals(0, sizeDifference)
     }

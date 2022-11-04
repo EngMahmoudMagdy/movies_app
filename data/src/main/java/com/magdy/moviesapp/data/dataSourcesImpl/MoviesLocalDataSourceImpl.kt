@@ -11,6 +11,7 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class MoviesLocalDataSourceImpl @Inject constructor(val moviesDAO: MoviesDAO) :
     MoviesLocalDataSource {
+    override suspend fun getMovieFromFavorites(movieId: Int): Movie?  = moviesDAO.getMovieFromFavorites(movieId)
 
     override suspend fun getAllFavoriteMovies(limit: Int, offset: Int): List<Movie> =
         moviesDAO.getMovieList(limit,offset)

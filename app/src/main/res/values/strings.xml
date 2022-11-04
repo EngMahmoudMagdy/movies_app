@@ -6,4 +6,11 @@
     <string name="success">Success</string>
     <string name="votes">%.1f (%d)</string>
     <string name="fav">Favorites</string>
+    <string name="title_activity_movie_details">MovieDetailsActivity</string>
+    <string name="movie_details">Movie Details</string>
+    <string name="favorite">Favorite</string>
+    <string name="unfavorite">Unfavorite</string>
+    <string name="genres">Genres:</string>
+    <string name="overview">Overview:</string>
+    <string name="Back">back</string>
 </resources>
