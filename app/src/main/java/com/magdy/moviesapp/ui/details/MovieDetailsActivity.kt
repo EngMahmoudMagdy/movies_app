@@ -41,6 +41,7 @@ class MovieDetailsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val onBack = {
+                setResult(RESULT_OK)
                 finish()
             }
             MovieDetailsScreen(

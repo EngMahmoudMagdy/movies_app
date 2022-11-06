@@ -1,6 +1,5 @@
 package com.magdy.moviesapp.ui.main.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -10,12 +9,11 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.magdy.moviesapp.R
 import com.magdy.moviesapp.core.models.Movie
-import com.magdy.moviesapp.core.utils.Constants
 import com.magdy.moviesapp.core.utils.Constants.BASE_IMAGE_URL_API
 import com.magdy.moviesapp.databinding.ItemMovieBinding
-import com.magdy.moviesapp.ui.details.MovieDetailsActivity
 
-class MoviesAdapter : PagingDataAdapter<Movie, MoviesAdapter.MyViewHolder>(DiffUtilCallback()) {
+class MoviesAdapter(private val onClick: (movie: Movie) -> Unit) :
+    PagingDataAdapter<Movie, MoviesAdapter.MyViewHolder>(DiffUtilCallback()) {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(getItem(position)!!)
     }
@@ -25,7 +23,8 @@ class MoviesAdapter : PagingDataAdapter<Movie, MoviesAdapter.MyViewHolder>(DiffU
         return MyViewHolder(binding)
     }
 
-    class MyViewHolder(private val view: ItemMovieBinding) : RecyclerView.ViewHolder(view.root) {
+    inner class MyViewHolder(private val view: ItemMovieBinding) :
+        RecyclerView.ViewHolder(view.root) {
 
         fun bind(item: Movie) = with(view) {
             title.text = item.title
@@ -42,7 +41,7 @@ class MoviesAdapter : PagingDataAdapter<Movie, MoviesAdapter.MyViewHolder>(DiffU
                 transformations(CircleCropTransformation())
             }
             view.root.setOnClickListener {
-                root.context.startActivity(Intent(root.context,MovieDetailsActivity::class.java).apply { putExtra(Constants.MOVIE, item) })
+                onClick(item)
             }
         }
     }

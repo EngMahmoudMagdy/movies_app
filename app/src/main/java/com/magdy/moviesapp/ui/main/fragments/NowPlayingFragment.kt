@@ -1,15 +1,21 @@
 package com.magdy.moviesapp.ui.main.fragments
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.magdy.moviesapp.core.models.Movie
+import com.magdy.moviesapp.core.utils.Constants
 import com.magdy.moviesapp.databinding.FgNowPlayingBinding
+import com.magdy.moviesapp.ui.details.MovieDetailsActivity
 import com.magdy.moviesapp.ui.main.adapters.MoviesAdapter
 import com.magdy.moviesapp.ui.main.viewModels.NowPlayingViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +27,14 @@ class NowPlayingFragment : Fragment() {
 
     lateinit var binding: FgNowPlayingBinding
     lateinit var moviesAdapter: MoviesAdapter
-    val mViewModel by viewModels<NowPlayingViewModel>()
+    private val mViewModel by viewModels<NowPlayingViewModel>()
+
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                moviesAdapter.refresh()
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +52,9 @@ class NowPlayingFragment : Fragment() {
     }
 
     private fun initViews() = with(binding) {
-        moviesAdapter = MoviesAdapter()
+        moviesAdapter = MoviesAdapter {
+            openMoviesDetailsActivityWithResult(it)
+        }
         recycler.run {
             addItemDecoration(
                 DividerItemDecoration(
@@ -60,6 +75,18 @@ class NowPlayingFragment : Fragment() {
         }
     }
 
+    private fun openMoviesDetailsActivityWithResult(movie: Movie) {
+        resultLauncher.launch(
+            Intent(
+                requireContext(),
+                MovieDetailsActivity::class.java
+            ).apply {
+                putExtra(
+                    Constants.MOVIE, movie
+                )
+            }
+        )
+    }
 
     private fun initViewModel() {
         lifecycleScope.launchWhenCreated {
